@@ -1,16 +1,21 @@
-export const Product = (): JSX.Element => {
+import { type TProduct } from '../types/product'
+
+export const Product = ({
+  image,
+  title,
+  description,
+  price
+}: TProduct): JSX.Element => {
   return (
     <div className="border border-gray-600">
       <img
-        src="https://i.dummyjson.com/data/products/3/thumbnail.jpg"
-        alt="product"
+        src={image}
+        alt={title}
       />
       <div className="px-2 mb-2">
-        <p className="uppercase text-xl font-medium">Samsung Universe 9</p>
-        <p className="text-base mb-2">
-          Samsungs new variant which goes beyond Galaxy to the Universe
-        </p>
-        <p className="text-xl font-bold">$1249</p>
+        <p className="uppercase text-xl font-medium">{title}</p>
+        <p className="text-base mb-2">{description}</p>
+        <p className="text-xl font-bold">${price}</p>
         <button
           type="button"
           className="border border-blue-600 py-1 px-4 rounded-md mt-4 text-blue-600 w-full hover:bg-blue-600 hover:text-white"
