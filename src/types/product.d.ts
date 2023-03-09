@@ -1,5 +1,6 @@
 export interface TProduct {
-  image: string
+  id: number
+  thumbnail: string
   title: string
   description: string
   price: number
