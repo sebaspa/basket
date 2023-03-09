@@ -5,3 +5,7 @@ export interface TProduct {
   description: string
   price: number
 }
+
+export interface TCartItem extends TProduct {
+  quantity: number
+}

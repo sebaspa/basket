@@ -1,9 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { type TProduct } from '../../types/product'
 import { getAllProductsThunk } from './productThunk'
+
+const products: TProduct[] = []
 
 const initialState = {
   isLoading: false,
-  products: []
+  products
 }
 
 export const getAllProducts = createAsyncThunk('product/getProducts', getAllProductsThunk)
