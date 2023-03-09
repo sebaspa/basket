@@ -1,13 +1,20 @@
-import { addToCart } from '../features/cart/cartSlice'
 import { useAppDispatch } from '../hooks/redux'
+import {
+  decrementQuantity,
+  incrementQuantity
+} from '../features/cart/cartSlice'
+
 import { type TCartItem } from '../types/product'
 
 export const ItemCart = ({ props }: { props: TCartItem }): JSX.Element => {
-  const { thumbnail, title, price, quantity } = props
-  console.log('props', props)
+  const { id, thumbnail, title, price, quantity } = props
   const dispatch = useAppDispatch()
-  const handleAddToCart = (): void => {
-    dispatch(addToCart(props))
+
+  const handleIncrementQuantity = (): void => {
+    dispatch(incrementQuantity(id))
+  }
+  const handleDecrementQuantity = (): void => {
+    dispatch(decrementQuantity(id))
   }
   return (
     <div className="py-6 border-t border-gray-400">
@@ -29,16 +36,17 @@ export const ItemCart = ({ props }: { props: TCartItem }): JSX.Element => {
               <button
                 data-action="decrement"
                 className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
+                onClick={handleDecrementQuantity}
               >
                 <span className="m-auto text-2xl font-thin">-</span>
               </button>
-              <p className="focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none">
+              <p className="bg-gray-300 text-gray-800 px-1 pt-2 font-bold w-16 text-center">
                 {quantity}
               </p>
               <button
                 data-action="increment"
                 className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
-                onClick={handleAddToCart}
+                onClick={handleIncrementQuantity}
               >
                 <span className="m-auto text-2xl font-thin">+</span>
               </button>
