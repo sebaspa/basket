@@ -1,10 +1,28 @@
-import { Product } from '../components'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useAppDispatch } from '../hooks/redux'
+import { getAllProducts } from '../features/product/productSlice'
+import { Product } from '../components'
 import { type RootState } from '../store'
 import { type TProduct } from '../types/product'
 
 export const Products = (): JSX.Element => {
-  const { products } = useSelector((store: RootState) => store.product)
+  const dispatch = useAppDispatch()
+  const { isLoading, products } = useSelector((store: RootState) => store.product)
+
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      await dispatch(getAllProducts(null))
+    }
+    fetchData().catch(console.error)
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div>Cargando...</div>
+    )
+  }
+
   return (
     <div className="grid grid-cols-12 gap-4 mb-5">
       {products.map((product: TProduct) => (

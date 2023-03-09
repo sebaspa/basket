@@ -1,6 +1,7 @@
 import { type TProduct } from '../types/product'
 import { useAppDispatch } from '../hooks/redux'
 import { addToCart } from '../features/cart/cartSlice'
+import { spinner } from '../assets/images'
 
 export const Product = ({
   id,
@@ -10,18 +11,29 @@ export const Product = ({
   price
 }: TProduct): JSX.Element => {
   const dispatch = useAppDispatch()
-  const handleAddToCart = ({ id, thumbnail, title, description, price }: TProduct): void => {
+  const handleAddToCart = ({
+    id,
+    thumbnail,
+    title,
+    description,
+    price
+  }: TProduct): void => {
     dispatch(addToCart({ id, thumbnail, title, description, price }))
   }
   return (
     <div className="border border-gray-600 h-full">
       <div className="h-full flex flex-col justify-between">
         <div>
-          <img
-            src={thumbnail}
-            alt={title}
-            className="h-36 w-full object-cover mb-2"
-          />
+          <div className="relative h-36 w-full">
+            <div className="w-full h-full absolute flex justify-center items-center z-0">
+              <img src={spinner} alt="spinner" className="w-16 h-16 mx-auto" />
+            </div>
+            <img
+              src={thumbnail}
+              alt={title}
+              className="h-36 w-full object-cover mb-2 relative z-10"
+            />
+          </div>
           <div className="px-2 mb-2">
             <div>
               <p className="uppercase text-xl font-medium">{title}</p>
@@ -32,7 +44,9 @@ export const Product = ({
         </div>
         <div className="px-2 mb-2">
           <button
-            onClick={() => { handleAddToCart({ id, thumbnail, title, description, price }) }}
+            onClick={() => {
+              handleAddToCart({ id, thumbnail, title, description, price })
+            }}
             type="button"
             className="border border-blue-600 py-1 px-4 rounded-md mt-4 text-blue-600 w-full hover:bg-blue-600 hover:text-white"
           >
