@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Products } from '../components'
+import { ButtonCountBasket, Products } from '../components'
 import { useAppDispatch } from '../hooks/redux'
 import { getAllProducts } from '../features/product/productSlice'
 
@@ -15,9 +15,7 @@ export const ShoppingCart = (): JSX.Element => {
   return (
     <>
       <div className="container mx-auto px-4">
-        <div className="ml-auto border border-blue-600 w-fit my-10 py-1 px-4 rounded-md">
-          <p className="text-base text-blue-600">Your Basket (2 items)</p>
-        </div>
+        <ButtonCountBasket />
       </div>
       <div className="container mx-auto px-4 max-w-7xl">
         <Products />
