@@ -5,6 +5,13 @@ import { type RootState } from '../store'
 
 export const ShoppingCart = (): JSX.Element => {
   const cart = useSelector((state: RootState) => state.cart.cart)
+  const getTotal = (): number => {
+    let totalPrice = 0
+    cart.forEach(item => {
+      totalPrice += item.price * item.quantity
+    })
+    return totalPrice
+  }
   return (
     <>
       <div className="container mx-auto px-4">
@@ -21,7 +28,7 @@ export const ShoppingCart = (): JSX.Element => {
         <div className="rounded-2xl bg-gray-300 w-full p-4">
           <div className="flex justify-between">
             <p className="font-bold text-2xl">Total</p>
-            <p className="text-xl">$10.000</p>
+            <p className="text-xl">${getTotal()}</p>
           </div>
         </div>
         <div className="flex gap-4 mt-6 mb-5 items-center">
