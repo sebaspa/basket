@@ -1,4 +1,6 @@
 import { type TProduct } from '../types/product'
+import { useAppDispatch } from '../hooks/redux'
+import { addToCart } from '../features/cart/cartSlice'
 
 export const Product = ({
   id,
@@ -7,6 +9,10 @@ export const Product = ({
   description,
   price
 }: TProduct): JSX.Element => {
+  const dispatch = useAppDispatch()
+  const handleAddToCart = ({ id, thumbnail, title, description, price }: TProduct): void => {
+    dispatch(addToCart({ id, thumbnail, title, description, price }))
+  }
   return (
     <div className="border border-gray-600 h-full">
       <div className="h-full flex flex-col justify-between">
@@ -26,6 +32,7 @@ export const Product = ({
         </div>
         <div className="px-2 mb-2">
           <button
+            onClick={() => { handleAddToCart({ id, thumbnail, title, description, price }) }}
             type="button"
             className="border border-blue-600 py-1 px-4 rounded-md mt-4 text-blue-600 w-full hover:bg-blue-600 hover:text-white"
           >
