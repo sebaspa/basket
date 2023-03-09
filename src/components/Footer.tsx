@@ -1,5 +1,5 @@
 export const Footer = (): JSX.Element => {
   return (
-    <div>Footer</div>
+    <div className="w-full py-3 px-4 bg-blue-500 text-white text-center">Footer</div>
   )
 }
