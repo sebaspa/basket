@@ -1,7 +1,8 @@
 import { useAppDispatch } from '../hooks/redux'
 import {
   decrementQuantity,
-  incrementQuantity
+  incrementQuantity,
+  removeItem
 } from '../features/cart/cartSlice'
 
 import { type TCartItem } from '../types/product'
@@ -15,6 +16,9 @@ export const ItemCart = ({ props }: { props: TCartItem }): JSX.Element => {
   }
   const handleDecrementQuantity = (): void => {
     dispatch(decrementQuantity(id))
+  }
+  const handleRemoveItem = (): void => {
+    dispatch(removeItem(id))
   }
   return (
     <div className="py-6 border-t border-gray-400">
@@ -52,6 +56,13 @@ export const ItemCart = ({ props }: { props: TCartItem }): JSX.Element => {
               </button>
             </div>
           </div>
+          <button
+            type="button"
+            className="px-4 py-1 bg-red-500 text-white hover:bg-red-600 rounded-lg mt-2"
+            onClick={handleRemoveItem}
+          >
+            Remove
+          </button>
         </div>
         <div className="col-span-6 md:col-span-4 lg:col-span-5">
           <p className="text-xl font-bold text-right">${price}</p>
