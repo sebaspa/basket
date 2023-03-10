@@ -9,11 +9,17 @@ export const App = (): JSX.Element => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<ListProducts />} />
           <Route path="/cart" element={<ShoppingCart />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/search" element={<SearchPage />} />
-          </Route>
         </Route>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }>
+            <Route path='/search' element={<SearchPage />}></Route>
+            <Route path='/product/:id' element={<ProductPage />}></Route>
+          </Route>
       </Routes>
     </>
   )
