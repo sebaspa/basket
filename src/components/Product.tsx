@@ -59,7 +59,7 @@ export const Product = ({
             </button>
             {user !== null && (
               <Link
-                to="/"
+                to={`/product/${id}`}
                 className="border border-green-600 py-1 px-4 rounded-md mt-4 text-green-600 w-full hover:bg-green-600 hover:text-white text-center"
               >
                 View
