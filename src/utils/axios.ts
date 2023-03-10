@@ -15,7 +15,7 @@ const user = getUserFromLocalStorage()
 customFetch.interceptors.request.use((config) => {
   if (user !== null) {
     const token: string = user.token
-    config.headers['Content-Type'] = 'application/json'
+    config.headers['Content-Type'] = 'application/json; charset=utf-8'
     config.headers.Authorization = `Bearer ${token}`
   }
   return config

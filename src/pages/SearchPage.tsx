@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Products } from '../components'
+import { ButtonCountBasket, Products } from '../components'
 import { type RootState } from '../store'
 
 export const SearchPage = (): JSX.Element => {
@@ -38,6 +38,7 @@ export const SearchPage = (): JSX.Element => {
             }}
           />
         </div>
+        <ButtonCountBasket />
         <Products isLoading={false} products={productsToFilter} />
       </div>
     </>
