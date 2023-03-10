@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { type UserLogin, type UserInitialState } from '../../types/user'
+import { getUserFromLocalStorage, removeLocalStorage, setLocalStorage } from '../../utils/localStorage'
 import { loginUserThunk } from './userThunk'
 
 const initialState: UserInitialState = {
   isLoading: false,
-  user: null
+  user: getUserFromLocalStorage()
 }
 
 export const loginUser = createAsyncThunk(
@@ -20,6 +21,7 @@ const userSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       state.user = null
+      removeLocalStorage('user')
     }
   },
   extraReducers: (builder) => {
@@ -29,6 +31,7 @@ const userSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
       state.isLoading = false
       state.user = payload
+      setLocalStorage('user', state.user)
     })
     builder.addCase(loginUser.rejected, (state, { payload }: any) => {
       state.isLoading = false

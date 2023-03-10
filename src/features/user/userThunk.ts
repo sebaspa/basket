@@ -1,5 +1,5 @@
 import { type UserLogin } from '../../types/user'
-import customFetch from '../../utils/axios'
+import { customFetch } from '../../utils/axios'
 
 export const loginUserThunk = async (
   url: string,
