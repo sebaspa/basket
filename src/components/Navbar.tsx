@@ -18,7 +18,7 @@ export const Navbar = (): JSX.Element => {
   return (
     <>
       <div className="container mx-auto px-4 py-3">
-        <div className="flex gap-4 justify-between">
+        <div className="flex gap-4 justify-between flex-col md:flex-row">
           <div>
             <ul className="flex gap-4" id="mainMenu">
               <li>

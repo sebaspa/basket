@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { type TProduct } from '../../types/product'
-import { getAllProductsThunk } from './productThunk'
+import { getAllProductsThunk, getProductThunk } from './productThunk'
 
 const products: TProduct[] = []
 
@@ -10,6 +10,7 @@ const initialState = {
 }
 
 export const getAllProducts = createAsyncThunk('product/getProducts', getAllProductsThunk)
+export const getProduct = createAsyncThunk('product/getProduct', getProductThunk)
 
 const productSlice = createSlice({
   name: 'product',
@@ -24,6 +25,16 @@ const productSlice = createSlice({
       state.products = payload
     })
     builder.addCase(getAllProducts.rejected, (state, { payload }) => {
+      state.isLoading = false
+      console.error('Error:', payload)
+    })
+    builder.addCase(getProduct.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(getProduct.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+    })
+    builder.addCase(getProduct.rejected, (state, { payload }) => {
       state.isLoading = false
       console.error('Error:', payload)
     })
